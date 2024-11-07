@@ -101,3 +101,4 @@ JOIN
 JOIN
 	Carros c ON c.IDCarro = v.IDCarro;
 SELECT*FROM RelatorioFinanceiro;
+SELECT SUM(ValorVenda),SUM(ValorFornecedor),SUM(ValorRecebido),SUM(ValorComissao),SUM(Lucro) From RelatorioFinanceiro;
