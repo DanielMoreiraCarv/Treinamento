@@ -1,0 +1,82 @@
+CREATE TABLE Fornecedores(
+	IDFornecedor  INT NOT NULL AUTO_INCREMENT,
+  	CPFouCNPJ VARCHAR(40),
+  	Nome VARCHAR(40),
+  	Telefone VARCHAR(13),
+  	Email VARCHAR(50),
+  	ContaBancaria VARCHAR(50),
+  	AgenciaBancaria VARCHAR(50),
+  	Primary key(IDFornecedor)
+);
+
+CREATE TABLE Carros(
+	IDCarro INT NOT NULL AUTO_INCREMENT,
+  	Placa VARCHAR(10),
+  	IDFornecedor INT NOT NULL,
+  	Cor VARCHAR(30),
+  	Modelo VARCHAR(50),
+  	Marca VARCHAR(50),
+  	AnoFabricacao YEAR,
+  	Quilometragem DOUBLE,
+  	ValorFornecedor DOUBLE,
+  	ValorTabelaFIP DOUBLE,
+  	Historico VARCHAR(90),
+  	Primary key(IDCarro),
+  	Foreign key(IDFornecedor) references Fornecedores(IDFornecedor)
+);
+
+CREATE TABLE ESTOQUE(
+	IDEstoque INT DEFAULT 0,
+  	IDCarro INT,
+  	DataEntrada DATE NOT NULL,
+  	DataSaida DATE,
+  	Foreign Key(IDCarro) REFERENCES Carros(IDCarro),
+  	Primary Key(IDCarro)
+);
+
+CREATE TABLE Clientes(
+	IDCliente INT NOT NULL AUTO_INCREMENT,
+  	CPF VARCHAR(40),
+  	Nome VARCHAR(90),
+  	Telefone VARCHAR(13),
+  	Email VARCHAR(90),
+  	Primary key(IDCliente)
+);
+
+CREATE TABLE Funcionarios(
+	IDFuncionario INT NOT NULL AUTO_INCREMENT,
+ 	Nome VARCHAR(90),
+  	CPF VARCHAR(40),
+  	DataNascimento DATE,
+  	Telefone VARCHAR(13),
+  	Email VARCHAR(90),
+  	ContaBancaria VARCHAR(90),
+  	AgenciaBancaria VARCHAR(90),
+  	Primary Key(IDFuncionario)
+);
+
+CREATE TABLE Vendas(
+	IDVenda INT NOT NULL AUTO_INCREMENT,
+  	IDFuncionario INT,
+  	IDCarro INT,
+  	IDCliente INT,
+  	ValorVenda DOUBLE NOT NULL,
+  	ComissãoPorc DOUBLE(10,2),
+  	StatusCarro ENUM('ENTREGUE','À CAMINHO DA LOJA','NA LOJA','NO ESTOQUE'),
+  	DataVenda DATE NOT NULL,
+  	TipoCompra ENUM('À VISTA','PARCELADO'),
+  	Primary Key(IDVenda),
+  	Foreign Key(IDFuncionario) REFERENCES Funcionarios(IDFuncionario),
+  	Foreign Key(IDCarro) REFERENCES Carros(IDCarro),
+  	Foreign Key(IDCliente) REFERENCES Clientes(IDCliente)
+);
+
+CREATE TABLE Financeiro(
+	IDVenda INT NOT NULL,
+  	StatusPagamento ENUM('CONCLUÍDO','DEVENDO','EM ANDAMENTO'),
+  	ValorRecebido DOUBLE,
+  	ValorComissao DOUBLE,
+  	Lucro DOUBLE,
+  	Foreign Key(IDVenda) REFERENCES Vendas(IDVenda),
+  	Primary Key(IDVenda)
+);
