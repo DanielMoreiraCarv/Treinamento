@@ -16,3 +16,13 @@ Detalhamento dos Módulos:
 2)Controle de Estoque e Vendas🆗️
 3)Emitir Documentos Fiscais e Acompanhar o Financeiro🆗️
 4)Gerar Relatórios Personalizados, para ajudar nas decisões🆗️
+
+Condições: 
+    1)1 Fornecedor pode fornecer 1 ou + carros;
+    2)1 carro deve vir de um único fornecedor;
+    3)1 carro deve estar em apênas 1 estoque;
+    4)1 carro só pode ser vendido uma única vez, a não ser que ele seja fornecido novamente para a revendedora;
+    5)1 Cliente pode comprar 1 ou mais carros, mas cada cadastro de venda deve ser feito separadamente;
+    6)Apênas 1 funcinário deve ser o responsável por cada venda;
+    7)1 Funcionário pode ter 1 ou + vendas;
+    8)Cada venda deve ser registrada no Financeiro separadamente;
