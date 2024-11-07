@@ -1,0 +1,18 @@
+Desenvolva um sistema de gestão para uma revenda de veículos que permita cadastrar e gerenciar **veículos, clientes, funcionários e fornecedores**; **realizar o controle de estoque e vendas**; **emitir documentos fiscais e acompanhar o financeiro**;
+ **e gerar relatórios personalizados para auxiliar na tomada de decisões**
+Justificativa:
+
+Detalhamento dos Módulos:
+
+    Cadastro: Permitir o registro detalhado de veículos (marca, modelo, ano, cor, quilometragem, etc.), clientes, funcionários e fornecedores, com informações relevantes para cada entidade.
+    Estoque: Controlar a entrada e saída de veículos, peças e acessórios, gerando relatórios de estoque e alertas de baixa quantidade.
+    Vendas: Realizar o cadastro de vendas, emitir propostas, contratos e notas fiscais, calcular comissões e acompanhar o status das negociações.
+    Financeiro: Gerenciar contas a receber e a pagar, controlar o fluxo de caixa, emitir relatórios financeiros e integrar com sistemas de pagamento.
+    Relatórios: Gerar relatórios personalizados sobre vendas, estoque, clientes, funcionários e indicadores financeiros, permitindo a análise do desempenho da revenda.
+    
+    
+    
+1)Cadastrar/Gerenciar Veículos, Clientes, Funcionários e Fornecedores 🆗️
+2)Controle de Estoque e Vendas🆗️
+3)Emitir Documentos Fiscais e Acompanhar o Financeiro🆗️
+4)Gerar Relatórios Personalizados, para ajudar nas decisões🆗️
