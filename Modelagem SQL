@@ -58,7 +58,7 @@ CREATE TABLE Funcionarios(
 CREATE TABLE Vendas(
 	IDVenda INT NOT NULL AUTO_INCREMENT,
   	IDFuncionario INT,
-  	IDCarro INT,
+  	IDCarro INT NOT NULL,
   	IDCliente INT,
   	ValorVenda DOUBLE NOT NULL,
   	ComissãoPorc DOUBLE(10,2),
@@ -80,3 +80,24 @@ CREATE TABLE Financeiro(
   	Foreign Key(IDVenda) REFERENCES Vendas(IDVenda),
   	Primary Key(IDVenda)
 );
+
+CREATE VIEW RelatorioFinanceiro AS
+SELECT
+	f.IDVenda,
+    v.TipoCompra,
+    v.ValorVenda,    
+    c.ValorTabelaFIP,
+    c.ValorFornecedor,
+    f.StatusPagamento,
+    f.ValorRecebido,
+    f.ValorComissao,
+    f.Lucro,
+    v.StatusCarro,
+    v.DataVenda
+FROM
+	Vendas v
+JOIN
+	Financeiro f ON f.IDVenda = v.IDVenda
+JOIN
+	Carros c ON c.IDCarro = v.IDCarro;
+SELECT*FROM RelatorioFinanceiro;
