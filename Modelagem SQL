@@ -83,7 +83,7 @@ CREATE TABLE Financeiro(
 
 CREATE VIEW RelatorioFinanceiro AS
 SELECT
-	f.IDVenda,
+    f.IDVenda,
     v.TipoCompra,
     v.ValorVenda,    
     c.ValorTabelaFIP,
@@ -100,5 +100,17 @@ JOIN
 	Financeiro f ON f.IDVenda = v.IDVenda
 JOIN
 	Carros c ON c.IDCarro = v.IDCarro;
+
+CREATE VIEW RelatorioValoresTotais AS
+SELECT
+	SUM(ValorVenda) AS TOTAL_VENDA,
+    SUM(ValorFornecedor) AS TOTAL_FORNECEDORES,
+    SUM(ValorRecebido) AS VALOR_JÁ_RECEBIDO,
+    SUM(ValorComissao) AS VALOR_DAS_COMISSÕES,
+    SUM(Lucro) AS LUCRO_TOTAL
+FROM 
+	RelatorioFinanceiro;
+
+SELECT*FROM RelatorioValoresTotais;
 SELECT*FROM RelatorioFinanceiro;
 SELECT SUM(ValorVenda),SUM(ValorFornecedor),SUM(ValorRecebido),SUM(ValorComissao),SUM(Lucro) From RelatorioFinanceiro;
