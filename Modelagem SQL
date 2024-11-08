@@ -61,7 +61,7 @@ CREATE TABLE Vendas(
   	IDCarro INT NOT NULL,
   	IDCliente INT,
   	ValorVenda DOUBLE NOT NULL,
-  	ComissãoPorc DOUBLE(10,2),
+  	ComissaoPorc DOUBLE(10,2),
   	StatusCarro ENUM('ENTREGUE','À CAMINHO DA LOJA','NA LOJA','NO ESTOQUE'),
   	DataVenda DATE NOT NULL,
   	TipoCompra ENUM('À VISTA','PARCELADO'),
