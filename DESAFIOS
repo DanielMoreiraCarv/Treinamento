@@ -1,0 +1,10 @@
+Qual cliente comprou mais veículos? OK
+Qual cliente comprou o carro mais caro? Ok
+Quantos veículos foram entregues dia 15/04/2024? OK
+Qual o valor apurado de vendas por dia(Necessário exibir o valor total e o dia)? OK
+Qual marca é a mais vendida? OK
+Qual o meu faturamento liquido e o bruto de novembro de 2024? OK
+Listar todos os carros disponíveis em estoque? OK
+Liste os clientes que compraram mais de um carro? OK 
+Gere o SQL de um carro já vendido que na verdade não existia em estoque.
+Gere um script de para deletar um veículo já vendido que na verdade não deveria estar em estoque (erro de cadastro) OK
