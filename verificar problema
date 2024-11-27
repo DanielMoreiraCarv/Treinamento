@@ -1,0 +1,45 @@
+package Treinamento;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.io.IOException;
+import java.lang.Math;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class Number {
+	
+	public static void main(String[] args) throws IOException {
+		//Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		ArrayList<String> linhas = new ArrayList<String>();
+		System.out.print("Informe a quantidade de tarefas: ");
+		int quantidade = sc.nextInt();
+		int i = 0;
+		while(i<quantidade) {
+			System.out.println(i);
+			sc.nextLine();
+			String tarefa = sc.nextLine();
+			sc.nextLine();
+			linhas.add(tarefa);
+			i++;
+		}
+		Path arquivo = Paths.get("/home/406862/Documentos/Arquivo.txt");
+		Files.write(arquivo,linhas);
+		
+		
+		sc.close();
+	}
+	
+	public void LerArquivo(Path caminho) throws IOException {
+		List<String> linhas2 = Files.readAllLines(caminho);
+		for(int i = 0 ;i<linhas2.size();i++) {
+			System.out.println(linhas2.get(i));
+		}
+	}
+	
+	
+	
+}
