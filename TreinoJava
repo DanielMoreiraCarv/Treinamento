@@ -1,0 +1,163 @@
+package Treinamento;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Number {
+
+	public static void main(String[] args) {
+		Locale.setDefault(Locale.US);
+		Scanner sc = new Scanner(System.in);
+		try {
+			System.out.println("\nInforme a operação que deseja fazer:");
+			System.out.println(
+					"1 - Questão 1 \n2 - Questão 2 \n3 - Questão 3 \n4 - Questão 4 \n5 - Questão 1 Alternativa");
+			System.out.print("Operação: ");
+
+			
+			while (!sc.hasNextInt()) {
+				System.out.println("Entrada inválida. Informe um número inteiro.");
+				sc.next(); 
+			}
+			int operador = sc.nextInt();
+			sc.nextLine(); 
+
+			switch (operador) {
+			case 1:
+				System.out.print("Informe o primeiro valor (double -> usado na soma): ");
+				double parametro1Questao01 = sc.nextDouble();
+				System.out.print("Informe o segundo valor (double -> usado na soma): ");
+				double parametro2Questao01 = sc.nextDouble();
+				System.out.print("Informe o terceiro valor (inteiro == divisor): ");
+				int divisorQuestao01 = sc.nextInt();
+				somarParametrosDividindoPorInteiro(parametro1Questao01, parametro2Questao01, divisorQuestao01);
+				break;
+			case 2:
+				System.out.print("Informe o primeiro valor (double -> usado na multiplicação): ");
+				double parametro1Questao02 = sc.nextDouble();
+				System.out.print("Informe o segundo valor (double -> usado na multiplicação): ");
+				double parametro2Questao02 = sc.nextDouble();
+				System.out.print("Informe o terceiro valor (double -> usado na divisão): ");
+				double divisorQuestao02 = sc.nextDouble();
+				multiplicarEDividir(parametro1Questao02, parametro2Questao02, divisorQuestao02);
+				break;
+			case 3:
+				System.out.print("Informe o valor (double) que será truncado: ");
+				double parametroQuestao03 = sc.nextDouble();
+				truncarValor(parametroQuestao03);
+				break;
+			case 4:
+				System.out.print("Informe o valor da compra: ");
+				double valorCompra = sc.nextDouble();
+				System.out.print("Informe a quantidade de parcelas: ");
+				int quantidadeParcela = sc.nextInt();
+				calculoValorParcelas(valorCompra, quantidadeParcela);
+				break;
+			case 5:
+				System.out.print("Você deseja trabalhar com BigDecimal? \n1-Sim \n2-Não \nResposta: ");
+				while (!sc.hasNextInt()) {
+					System.out.println("Entrada inválida. Informe um número inteiro.");
+					sc.next();
+				}
+				int resposta = sc.nextInt();
+				sc.nextLine();
+				if (resposta == 1) {
+					System.out.print("Informe o primeiro valor (BigDecimal): ");
+					String parametro1Questao1AlternativaString = sc.nextLine();
+					BigDecimal parametro1Questao1AlternativaBDf = transformarStringBigDecimal(parametro1Questao1AlternativaString);
+					System.out.print("Informe o segundo valor (BigDecimal): ");
+					String parametro2Questao1AlternativaString = sc.nextLine();
+					BigDecimal parametro2Questao1AlternativaBD = transformarStringBigDecimal(parametro2Questao1AlternativaString);
+					System.out.print("Informe o terceiro valor (int): ");
+					int parametro3Questao1Alternativa = sc.nextInt();
+					somarParametrosDividindoPorInteiroAlternativoBigDecimal(parametro1Questao1AlternativaBDf, parametro2Questao1AlternativaBD, parametro3Questao1Alternativa);
+				} else {
+					System.out.print("Informe o primeiro valor (double): ");
+					double parametro1Questao1Alternativa = sc.nextInt();
+					System.out.print("Informe o segundo valor (double): ");
+					double parametro2Questao1Alternativa = sc.nextInt();
+					System.out.print("Informe o terceiro valor (int): ");
+					int parametro3Questao1Alternativa = sc.nextInt();
+					somarParametrosDividindoPorInteiroAlternativo(parametro1Questao1Alternativa, parametro2Questao1Alternativa, parametro3Questao1Alternativa);
+				}
+				break;
+			default:
+				System.out.println("Saindo do programa.");
+				break;
+			}
+		} catch (Exception e) {
+			System.out.println("Ocorreu um erro: " + e.getMessage());
+			if (sc.hasNextLine()) {
+				sc.nextLine(); // Limpa o buffer caso necessário
+			}
+		}
+
+		sc.close();
+	}
+
+	public static void somarParametrosDividindoPorInteiro(double parametro01, double parametro02, int divisor) {
+		DecimalFormat df = new DecimalFormat("#.##");
+		double parametro01Formatado = Double.parseDouble(df.format(parametro01));
+		double parametro02Formatado = Double.parseDouble(df.format(parametro02));
+		double resultado = (parametro01Formatado+parametro02Formatado) / divisor;
+		System.out.println("Valor 'original': " + resultado);
+		System.out.printf("Valor arredondado %.2f", resultado);
+	}
+
+	public static void somarParametrosDividindoPorInteiroAlternativo(double parametro01, double parametro02, int divisor) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Até quantas casas se deseja arredondar: ");
+		int casasPosVirgula = sc.nextInt();
+		double resultado = (parametro01 + parametro02) / divisor;
+		System.out.println("Valor não Arredondado: " + resultado);
+		String textoFormatacao = "Valor Arredondado: %." + casasPosVirgula + "f";
+		System.out.printf(textoFormatacao, resultado);
+		sc.close();
+	}
+
+	public static void multiplicarEDividir(double A, double B, double C) {
+		double X = A * B;
+		double resultado = X / C;
+		System.out.println("Valor não Arredondado: " + resultado);
+		System.out.printf("Valor Arredondado: %.2f", resultado);
+	}
+
+	public static void truncarValor(double parametro01) {
+		int parametro01Truncado = (int) parametro01;
+		System.out.println("Valor truncado: " + parametro01Truncado);
+	}
+
+	public static void calculoValorParcelas(double valor, int quantidadeParcela) {
+		double valorParcela = valor / quantidadeParcela;
+		DecimalFormat df = new DecimalFormat("#.##");
+		double valorFormatParcela = Double.parseDouble(df.format(valorParcela));
+		boolean verifica = (valorFormatParcela * quantidadeParcela == valor);
+		if (verifica == false) {
+			System.out.println("Serão " + (quantidadeParcela - 1) + " Parcela de: " + valorFormatParcela + " Totalizando -> "
+					+ (valorFormatParcela * (quantidadeParcela - 1)));
+			double valorLastParcela = valor - (valorFormatParcela * (quantidadeParcela - 1));
+			System.out.printf("E uma parcela de: %.2f%n", valorLastParcela);
+		} else {
+			System.out.printf("Serão " + (quantidadeParcela) + " Parcela de: %.2f", valorFormatParcela);
+		}
+	}
+
+	public static void somarParametrosDividindoPorInteiroAlternativoBigDecimal(BigDecimal A, BigDecimal B, int i) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Até quantas casas se deseja arredondar: ");
+		int casas = sc.nextInt();
+		String value = "" + i;
+		BigDecimal X = A.divide(B, casas, RoundingMode.HALF_UP);
+		BigDecimal resultado = X.divide(transformarStringBigDecimal(value), casas, RoundingMode.HALF_UP);
+		System.out.print("Resultado: " + resultado);
+		sc.close();
+	}
+
+	public static BigDecimal transformarStringBigDecimal(String A) {
+		BigDecimal value = new BigDecimal(A);
+		return value;
+	}
+}
