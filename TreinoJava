@@ -35,8 +35,8 @@ public class Number {
 		System.out.println("");
 	}
 
-	private static void multiplicarEDividir(double A, double B, double C) {
-		double resultadoFinal = (A*B) / C;
+	private static void multiplicarEDividir(double parametro01, double parametro02, double parametro03) {
+		double resultadoFinal = (parametro01*parametro02) / parametro03;
 		System.out.println("Valor não Arredondado: " + resultadoFinal);
 		System.out.printf("Valor Arredondado: %.2f", resultadoFinal);
 	}
@@ -61,11 +61,11 @@ public class Number {
 		}
 	}
 
-	private static void somarParametrosDividindoPorInteiroAlternativoBigDecimal(BigDecimal A, BigDecimal B, int i) {
+	private static void somarParametrosDividindoPorInteiroAlternativoBigDecimal(BigDecimal parametro01, BigDecimal parametro02, int parametro03) {
 		System.out.print("Até quantas casas se deseja arredondar: ");
 		int casas = sc.nextInt();
-		String valorDivisor = "" + i;
-		BigDecimal resultadoSoma = A.add(B);
+		String valorDivisor = "" + parametro03;
+		BigDecimal resultadoSoma = parametro01.add(parametro02);
 		BigDecimal resultadoArredondadoDivisao1 = resultadoSoma.divide(transformarStringBigDecimal(valorDivisor), casas, RoundingMode.HALF_UP);
 		System.out.println("Resultado: " + resultadoArredondadoDivisao1);
 	}
