@@ -78,3 +78,34 @@ public class App {
 
 }
 
+package Treinamento.Listagem;
+
+import java.text.DecimalFormat;
+
+public class objVenda {
+	private DecimalFormat df = new DecimalFormat("#.00");
+	String desc;
+	double valor;
+	public objVenda(String desc, double valor) {
+		super();
+		this.desc = desc;
+		this.valor = valor;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public double getValor() {
+		return valor;
+	}
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+	@Override
+	public String toString() {
+		return desc + ", R$:" + df.format(valor);
+	}
+	
+}
