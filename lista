@@ -3,7 +3,7 @@ package Treinamento.Listagem;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Comparator;
+//import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,101 +11,89 @@ import java.util.Scanner;
 
 public class App {
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
 		Map<LocalDate, List<objVenda>> vendas = new HashMap<>();
-		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		DateTimeFormatter formatoAp = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		List<LocalDate> listaDias = new ArrayList<>();
-		String dataPreFormatada;
-		LocalDate data;
 		int loop = 0;
 		while (loop == 0) {
-			System.out.print("Informe a descrição do produto que foi vendido: ");
-			String desc = sc.nextLine();
-
-			if (desc.equals("x")) {
-				loop++;
-			} else {
-				System.out.print("Informe o valor do produto que foi vendido: ");
-				double vlr = sc.nextDouble();
-				objVenda venda = new objVenda(desc, vlr);
-				sc.nextLine();
-				System.out.print("Informe a data da venda(yyyy-MM-dd): ");
-				dataPreFormatada = sc.nextLine();
-				data = LocalDate.parse(dataPreFormatada, formato);
-				if (vendas.containsKey(data)) {
-					List<objVenda> lista = new ArrayList<>();
-					lista = vendas.remove(data);
-					lista.add(venda);
-					vendas.put(data, lista);
-				} else {
-					List<objVenda> lista = new ArrayList<>();
-					lista.add(venda);
-					vendas.put(data, lista);
-					listaDias.add(data);
-				}
-			}
+			loop = criarObjVenda(loop, vendas, listaDias);
 		}
+		imprimirListagemOrdenada(vendas, listaDias);
+
+	}
+
+	public static void adicionarObjVenda(objVenda obj, LocalDate data, Map<LocalDate, List<objVenda>> vendas,
+			List<LocalDate> listaDias) {
+		if (vendas.containsKey(data)) {
+			List<objVenda> lista = new ArrayList<>();
+			lista = vendas.remove(data);
+			lista.add(obj);
+			vendas.put(data, lista);
+		} else {
+			List<objVenda> lista = new ArrayList<>();
+			lista.add(obj);
+			vendas.put(data, lista);
+			listaDias.add(data);
+		}
+	}
+
+	public static void imprimirListagemOrdenada(Map<LocalDate, List<objVenda>> vendas, List<LocalDate> listaDias) {
+		DateTimeFormatter formatoAp = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		System.out.println();
 		if (vendas.isEmpty()) {
 			System.out.println("Não possui nenhum valor");
 		} else {
-			listaDias.sort(Comparator.naturalOrder());
-			for (int size = 0; size < vendas.size(); size++) {
-				List<objVenda> listaVendaDia = new ArrayList<>();
-				listaVendaDia = (vendas.get(listaDias.get(size)));
+//			S1
+//			listaDias.sort(Comparator.naturalOrder());
+//			for (int size = 0; size < vendas.size(); size++) {
+//				double valorTotalVenda = 0;
+//				List<objVenda> listaVendaDia = new ArrayList<>();
+//				listaVendaDia = (vendas.get(listaDias.get(size)));
+//
+//				String diaApresentacao = listaDias.get(size).format(formatoAp);
+//				System.out.println(diaApresentacao);
+//				for (int tamanho = 0; tamanho < listaVendaDia.size(); tamanho++) {
+//					System.out.println(listaVendaDia.get(tamanho));
+//					valorTotalVenda += listaVendaDia.get(tamanho).valor;
+//				}
+//				System.out.printf("Valor Total das Vendas do dia("+diaApresentacao+") : R$%.2f",valorTotalVenda);
+//				System.out.println();
+//			}
 
-				String diaApresentacao = listaDias.get(size).format(formatoAp);
-				System.out.println(diaApresentacao);
-				for (int tamanho = 0; tamanho < listaVendaDia.size(); tamanho++) {
-					System.out.println(listaVendaDia.get(tamanho));
-				}
-				System.out.println();
-			}
-
-//			 S2
-			System.out.println("solução 2");
+//			S2
 			vendas.keySet().stream().sorted().forEach(d -> {
 				String diaApresentacao = d.format(formatoAp);
 				System.out.println(diaApresentacao);
 				vendas.get(d).forEach(System.out::println);
-				System.out.println();
+//				double value = 0;
+//				for (int limitador = 0; limitador < vendas.get(d).size(); limitador++) {
+//					value += vendas.get(d).get(limitador).valor;
+//				}
+//				System.out.printf("Valor total das Vendas no dia (" + diaApresentacao + ") : %.2f", value);
+//				System.out.println("\n");
 			});
 		}
-		sc.close();
+	}
+
+	public static int criarObjVenda(int loop, Map<LocalDate, List<objVenda>> vendas, List<LocalDate> listaDias) {
+		Scanner sc = new Scanner(System.in);
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		System.out.print("Informe a descrição do produto que foi vendido: ");
+		String desc = sc.nextLine();
+		if (desc.equals("x")) {
+			loop++;
+			sc.close();
+		} else {
+			System.out.print("Informe o valor do produto que foi vendido: ");
+			double vlr = sc.nextDouble();
+			objVenda venda = new objVenda(desc, vlr);
+			sc.nextLine();
+			System.out.print("Informe a data da venda(yyyy-MM-dd): ");
+			String dataPreFormatada = sc.nextLine();
+			LocalDate data = LocalDate.parse(dataPreFormatada, formato);
+			adicionarObjVenda(venda, data, vendas, listaDias);
+		}
+		return loop;
 
 	}
-	
-
-}
-
-package Treinamento.Listagem;
-
-import java.text.DecimalFormat;
-
-public class objVenda {
-	private DecimalFormat df = new DecimalFormat("#.00");
-	String desc;
-	double valor;
-	public objVenda(String desc, double valor) {
-		super();
-		this.desc = desc;
-		this.valor = valor;
-	}
-	public String getDesc() {
-		return desc;
-	}
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
-	public double getValor() {
-		return valor;
-	}
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
-	@Override
-	public String toString() {
-		return desc + ", R$:" + df.format(valor);
-	}
-	
 }
